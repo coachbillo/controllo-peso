@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tracker Peso & BMI</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "chart.js/auto": "https://esm.sh/chart.js@4.4.0/auto"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <main>
+      <section id="profile-section" class="card">
+        <h2>Dati personali</h2>
+        <form id="profile-form" autocomplete="off">
+          <div class="row">
+            <input name="nome" id="nome" placeholder="Nome" required />
+            <input name="cognome" id="cognome" placeholder="Cognome" required />
+          </div>
+          <div class="row">
+            <input name="eta" id="eta" type="number" min="0" placeholder="Età" required />
+            <select id="sesso" name="sesso" required>
+              <option value="" disabled selected>Sesso</option>
+              <option value="uomo">Uomo</option>
+              <option value="donna">Donna</option>
+            </select>
+          </div>
+          <div class="row">
+            <input name="altezza" id="altezza" type="number" min="50" max="250" placeholder="Altezza (cm)" required />
+            <select id="corporatura" name="corporatura" required>
+              <option value="" disabled selected>Corporatura</option>
+              <option value="esile">Esile</option>
+              <option value="normale">Normale</option>
+              <option value="muscolosa">Muscolosa</option>
+            </select>
+          </div>
+          <div class="row actions">
+            <button type="submit" id="save-profile">Salva</button>
+            <button type="button" id="reset-profile" class="muted">Reset</button>
+          </div>
+        </form>
+        <div id="bmi-card" class="result hidden">
+          <div>BMI: <strong id="bmi-value">--</strong></div>
+          <div>Categoria: <strong id="bmi-cat">--</strong></div>
+          <div>Peso forma: <strong id="peso-forma">--</strong> kg</div>
+          <div class="note small">Peso forma calcolato come valore centrale dell'intervallo BMI sano (18.5–24.9).</div>
+        </div>
+      </section>
+
+      <section id="log-section" class="card hidden">
+        <h2>Registro peso</h2>
+        <form id="log-form" autocomplete="off">
+          <div class="row">
+            <input id="peso" name="peso" type="number" step="0.1" min="20" placeholder="Peso (kg)" required />
+            <input id="orario" name="orario" type="time" required />
+          </div>
+          <div class="row">
+            <input id="data" name="data" type="date" required />
+          </div>
+          <div class="row">
+            <input id="note" name="note" placeholder="Note (opzionale)" />
+          </div>
+          <div class="row actions">
+            <button type="submit">Aggiungi</button>
+            <button id="clear-logs" type="button" class="muted">Elimina tutti</button>
+          </div>
+        </form>
+
+        <div id="chart-wrap">
+          <canvas id="weightChart" width="600" height="240"></canvas>
+        </div>
+
+        <div id="logs-list" class="logs"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
